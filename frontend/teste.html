@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota Liberada</title>
+</head>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh; margin:0; font-family:sans-serif;">
+
+    <h1 id="mensagem" style="font-size:50px;"></h1>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const mensagem = document.getElementById('mensagem');
+
+        if(!token){
+            window.location.href = 'index.html';
+        } else {
+            fetch('http://localhost:3000/teste', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                mode: "cors"
+            })
+            .then(res => {
+                if(res.ok) return res.json(); // ou .json() dependendo do backend
+                else throw new Error('Não autorizado');
+            })
+            .then(data => {
+                mensagem.textContent = data.mensagem;
+            })
+            .catch(err => {
+                console.error(err);
+                mensagem.textContent = 'Acesso negado';
+                setTimeout(()=>window.location.href='index.html', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
