@@ -1,0 +1,2 @@
+# teste-auth-js
+PROJETO DE TESTE PARA VAGA TRAINEE
