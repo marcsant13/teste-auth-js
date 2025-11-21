@@ -9,7 +9,7 @@ export async function authenticateToken(req, res, next) {
     const resultToken = validateToken(token);
 
     if (!resultToken.validado) {
-        return res.status(403).json({ mensagem: "Token inválido ou expirado" });
+        return res.status(401).json({ mensagem: "Token inválido ou expirado" });
     }
 
     next();

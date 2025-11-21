@@ -36,7 +36,7 @@ export async function loginUser(req, res) {
 
         console.log(error);
 
-        return res.status(404).json({
+        return res.status(401).json({
             mensagem: error.message
         });
 
